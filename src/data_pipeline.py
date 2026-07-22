@@ -16,6 +16,12 @@ def download_data(ticker, start, end):
     """
     print(f"Downloading {ticker} from {start} to {end}...")
     df = yf.download(ticker, start=start, end=end, auto_adjust=True)
+    
+    # Flatten MultiIndex columns produced by newer versions of yfinance
+    # yfinance now returns ('Close', 'SPY') instead of 'Close'
+    # This normalises to simple string column names throughout the project
+    if isinstance(df.columns, pd.MultiIndex):
+        df.columns = [col[0] for col in df.columns]
 
     # Validate data
     assert not df.empty, f"No data returned for {ticker}"

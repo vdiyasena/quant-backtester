@@ -38,6 +38,26 @@ def ma_crossover_signal(df, fast=20, slow=50):
 
     return signal
 
+def ma_crossover_long_only(df, fast=20, slow=50):
+    """
+    Long-only version of MA crossover.
+    Goes long when fast SMA > slow SMA, flat otherwise.
+    Never takes short positions.
+    
+    This is more appropriate for a strongly trending asset
+    like SPY where shorting during a bull market is costly.
+    
+    Signal: 1 = long, 0 = flat (cash)
+    """
+    assert f'sma_{fast}' in df.columns
+    assert f'sma_{slow}' in df.columns
+
+    signal = pd.Series(0, index=df.index, name='signal')
+    signal[df[f'sma_{fast}'] > df[f'sma_{slow}']] = 1
+
+    # Shift to avoid look-ahead bias
+    return signal.shift(1)
+
 
 def signal_summary(signal):
     """
