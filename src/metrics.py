@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 
 def annualised_return(returns, periods_per_year=252):
@@ -208,3 +209,142 @@ def compute_all_metrics(results, label='Strategy'):
     print(f"{'='*45}")
 
     return metrics
+
+# Defining Monte Carlo significance test for Sharpe ratio
+
+def monte_carlo_sharpe(results, n_simulations=10000,
+                        risk_free_rate=0.02, seed=42):
+    """
+    Monte Carlo permutation test for Sharpe ratio significance.
+
+    Tests whether the strategy's timing skill produces a Sharpe
+    ratio distinguishable from random signal timing.
+
+    If the observed Sharpe exceeds the 95th percentile of the
+    null distribution, the strategy's timing adds genuine value
+    beyond random entry/exit (p < 0.05).
+
+    Args:
+        results: DataFrame from run_backtest()
+        n_simulations: number of random shuffles
+        risk_free_rate: annual risk-free rate
+        seed: random seed for reproducibility
+
+    Returns:
+        dict with observed Sharpe, null distribution, and p-value
+
+    Reference:
+        Lopez de Prado, M. (2018). Advances in Financial Machine
+        Learning. Wiley. Chapter 8.
+    """
+    np.random.seed(seed)
+
+    market_returns = results['log_returns'].dropna()
+    signal = results['signal'].dropna()
+    transaction_cost = 0.001
+
+    # Align index
+    common_idx = market_returns.index.intersection(signal.index)
+    market_returns = market_returns.loc[common_idx]
+    signal = signal.loc[common_idx]
+
+    # Observed Sharpe using actual signal
+    actual_strategy = signal * market_returns
+    position_changes = signal.diff().abs()
+    actual_strategy -= position_changes * transaction_cost
+    observed_sharpe = sharpe_ratio(actual_strategy, risk_free_rate)
+
+    # Generate null distribution by shuffling SIGNAL
+    # This preserves the same fraction of long/flat days
+    # but randomises WHEN the strategy is in the market
+    signal_array = signal.values
+    null_sharpes = []
+
+    for _ in range(n_simulations):
+        # Shuffle signal randomly
+        shuffled_signal = np.random.permutation(signal_array)
+        shuffled_signal_series = pd.Series(
+            shuffled_signal, index=signal.index)
+
+        # Compute strategy returns with shuffled signal
+        strat_returns = shuffled_signal_series * market_returns
+        costs = shuffled_signal_series.diff().abs() * transaction_cost
+        strat_returns -= costs
+
+        sr = sharpe_ratio(strat_returns, risk_free_rate)
+        if np.isfinite(sr):
+            null_sharpes.append(sr)
+
+    null_sharpes = np.array(null_sharpes)
+
+    # p-value: fraction of simulations that beat observed Sharpe
+    p_value = (null_sharpes >= observed_sharpe).mean()
+    percentile = (null_sharpes < observed_sharpe).mean() * 100
+
+    return {
+        'observed_sharpe': observed_sharpe,
+        'null_sharpes': null_sharpes,
+        'p_value': p_value,
+        'percentile': percentile,
+        'mean_null': null_sharpes.mean(),
+        'std_null': null_sharpes.std(),
+        'significant': p_value < 0.05
+    }
+
+def plot_monte_carlo(mc_results, label='Strategy', 
+                     save_dir='figures'):
+    """
+    Plot Monte Carlo null distribution vs observed Sharpe ratio.
+    
+    Args:
+        mc_results: dict from monte_carlo_sharpe()
+        label: strategy name
+        save_dir: directory to save figure
+    """
+    import os
+    os.makedirs(save_dir, exist_ok=True)
+    
+    fig, ax = plt.subplots(figsize=(12, 5))
+    
+    null = mc_results['null_sharpes']
+
+    null = null[np.isfinite(null)]  # Remove any NaN or inf values
+
+    observed = mc_results['observed_sharpe']
+    
+    # Plot null distribution
+    ax.hist(null, bins=100, color='steelblue', 
+            edgecolor='white', alpha=0.7,
+            label='Null distribution (shuffled returns)')
+    
+    # Observed Sharpe
+    ax.axvline(observed, color='red', linewidth=2,
+               label=f'Observed Sharpe: {observed:.3f}')
+    
+    # 95th percentile
+    p95 = np.percentile(null, 95)
+    ax.axvline(p95, color='orange', linewidth=1.5,
+               linestyle='--',
+               label=f'95th percentile: {p95:.3f}')
+    
+    # Shade significant region
+    x_fill = null[null >= p95]
+    ax.hist(x_fill, bins=100, color='orange', 
+            alpha=0.4, edgecolor='none')
+    
+    ax.set_title(
+        f'Monte Carlo Significance Test — {label}\n'
+        f'p-value: {mc_results["p_value"]:.4f}  |  '
+        f'Percentile: {mc_results["percentile"]:.1f}%  |  '
+        f'Significant: {mc_results["significant"]}',
+        fontsize=12)
+    ax.set_xlabel('Sharpe Ratio')
+    ax.set_ylabel('Frequency')
+    ax.legend()
+    
+    plt.tight_layout()
+    save_path = os.path.join(save_dir, 
+                              'monte_carlo_significance.png')
+    plt.savefig(save_path, dpi=150, bbox_inches='tight')
+    plt.show()
+    print(f"Saved: {save_path}")
