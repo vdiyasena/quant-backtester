@@ -138,7 +138,16 @@ single most important correctness requirement in backtesting.
 
 ### Walk-Forward Testing
 
-*(To be completed — in progress)*
+### Walk-Forward Testing Limitation
+
+The 50/200 parameter combination was selected based on 
+full-period performance rather than through systematic 
+in-sample optimisation across a parameter grid. A more 
+rigorous implementation would define a grid of fast/slow 
+window combinations, select the optimal parameters using 
+in-sample data only, and report out-of-sample results for 
+that combination exclusively. This represents a direction 
+for future work.
 
 ### Transaction Costs
 
