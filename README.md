@@ -81,7 +81,7 @@ reversion to support a profitable mean reversion strategy.
 The returns series (H ≈ 0) confirms near-random walk 
 behaviour at the daily level.
 
-### Strategy Selection
+### Strategy Selection ###
 
 Based on this statistical analysis, a momentum-based moving 
 average crossover strategy was selected as the appropriate 
@@ -105,7 +105,7 @@ This follows the methodology outlined in Chan, E. (2013),
 - **Observations**: 3,472 trading days after feature 
   engineering
 
-### Key Data Characteristics
+### Key Data Characteristics ###
 
 | Metric | Value |
 |---|---|
@@ -138,7 +138,7 @@ single most important correctness requirement in backtesting.
 *Reference: Chan (2013), Chapter 3*
 ---
 
-## Strategies Tested
+## Strategies Tested ##
 
 Three variants of the moving average crossover were tested:
 
@@ -221,7 +221,7 @@ The out-of-sample period deliberately includes the 2020
 COVID crash and 2022 bear market — genuinely difficult 
 conditions differing substantially from the training period.
 
-### Walk-Forward Results — Golden Cross 50/200
+### Walk-Forward Results — Golden Cross 50/200 ###
 
 | Metric | In-Sample | Out-of-Sample |
 |---|---|---|
@@ -275,7 +275,8 @@ Clone the repository, install dependencies with
 `notebooks/SPY_MA_Crossover_Analysis.ipynb`.
 ---
 
-## Dependencies
+## Dependencies ##
+
 yfinance
 pandas
 numpy
