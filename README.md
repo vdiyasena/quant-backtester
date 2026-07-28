@@ -29,20 +29,20 @@ and the 2022 bear market.
 
 ## Project Structure
 
-quant-backtester/
-├── data/               # Raw and processed data storage
-├── src/
-│   ├── data_pipeline.py    # Data download, validation, returns
-│   ├── features.py         # Feature engineering, ADF test,
-│   │                       # Hurst exponent
-│   ├── signals.py          # Signal generation
-│   ├── backtester.py       # Core backtesting engine
-│   ├── metrics.py          # Performance metrics
-│   └── visualisation.py    # Plotting and reporting
-├── notebooks/
-│   └── exploration.ipynb   # Analysis and results
-├── requirements.txt
-└── README.md
+    quant-backtester/
+    ├── data/                   # Raw and processed data storage
+    ├── src/
+    │   ├── data_pipeline.py    # Data download, validation, returns
+    │   ├── features.py         # Feature engineering, ADF test,
+    │   │                       # Hurst exponent
+    │   ├── signals.py          # Signal generation
+    │   ├── backtester.py       # Core backtesting engine
+    │   ├── metrics.py          # Performance metrics
+    │   └── visualisation.py    # Plotting and reporting
+    ├── notebooks/
+    │   └── SPY_MA_Crossover_Analysis.ipynb
+    ├── requirements.txt
+    └── README.md
 
 ---
 
