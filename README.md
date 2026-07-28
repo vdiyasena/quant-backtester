@@ -11,8 +11,6 @@ engineering skills.
 
 ## Project Overview
 
----
-
 This project implements a full backtesting pipeline from raw 
 price data through to strategy evaluation and performance 
 reporting. The framework is designed with a rigorous methodology,
@@ -84,7 +82,7 @@ reversion to support a profitable mean reversion strategy.
 The returns series (H ≈ 0) confirms near-random walk 
 behaviour at the daily level.
 
-### Strategy Selection ###
+### Strategy Selection 
 
 Based on this statistical analysis, a momentum-based moving 
 average crossover strategy was selected as the appropriate 
@@ -145,7 +143,7 @@ single most important correctness requirement in backtesting.
 
 ---
 
-### Strategies Tested ###
+### Strategies Tested 
 
 Three variants of the moving average crossover were tested:
 
