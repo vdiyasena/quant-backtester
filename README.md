@@ -30,7 +30,6 @@ and the 2022 bear market.
 
 ## Project Structure
 
----
        
     quant-backtester/
     ├── data/                   # Raw and processed data storage
@@ -51,7 +50,6 @@ and the 2022 bear market.
 
 ## Statistical Analysis — Asset Selection
 
----
 
 Before implementing any strategy, SPY was tested for mean 
 reversion using two established methods from Chan (2013): 
@@ -102,7 +100,6 @@ This follows the methodology outlined in Chan, E. (2013),
 
 ## Data
 
----
 
 - **Source**: Yahoo Finance via the `yfinance` Python library
 - **Asset**: SPY (SPDR S&P 500 ETF Trust)
@@ -134,7 +131,6 @@ risk measurement.
 
 ## Methodology
 
----
 
 ### Look-Ahead Bias Prevention
 
@@ -168,7 +164,6 @@ representing realistic costs for a liquid ETF.
 
 ## Results
 
----
 
 ### Full Period Performance (2010-2024)
 
@@ -208,6 +203,8 @@ representing realistic costs for a liquid ETF.
 ### Metrics Comparison
 
 ![Metrics](notebooks/figures/metrics_comparison.png)
+
+---
 
 ## Walk-Forward Testing
 
