@@ -137,6 +137,7 @@ day and executed at day T+1. This is implemented via
 single most important correctness requirement in backtesting.
 
 *Reference: Chan (2013), Chapter 3*
+
 ---
 
 ## Strategies Tested ##
@@ -153,6 +154,7 @@ Transaction costs of 0.1% per trade were applied throughout,
 representing realistic costs for a liquid ETF.
 
 *Reference: Kissell (2013); Chan (2013)*
+
 ---
 
 ## Results
@@ -208,6 +210,7 @@ window combinations, select the optimal parameters using
 in-sample data only, and report out-of-sample results for 
 that combination exclusively. This represents a direction 
 for future work.
+
 ---
 
 ### Walk-Forward Testing Methodology
@@ -242,6 +245,7 @@ reflects the more turbulent 2019-2024 market environment
 rather than any failure of the strategy.
 
 *References: Chan (2013), pp. 67-71; López de Prado (2018), Ch. 7*
+
 ---
 
 ## Monte Carlo Significance Testing
@@ -274,10 +278,12 @@ regimes.
 Clone the repository, install dependencies with 
 `pip install -r requirements.txt`, and open 
 `notebooks/SPY_MA_Crossover_Analysis.ipynb`.
+
 ---
 
 ## Dependencies ##
 
+'''
 yfinance
 pandas
 numpy
@@ -286,7 +292,7 @@ seaborn
 scipy
 statsmodels
 jupyter
----
+'''
 
 ---
 
