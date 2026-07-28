@@ -105,7 +105,7 @@ This follows the methodology outlined in Chan, E. (2013),
 - **Observations**: 3,472 trading days after feature 
   engineering
 
-### Key Data Characteristics ###
+### Key Data Characteristics 
 
 | Metric | Value |
 |---|---|
@@ -122,6 +122,7 @@ negative moves occur more frequently than a normal
 distribution would predict — a well-established empirical 
 property of equity returns with important implications for 
 risk measurement.
+
 ---
 
 ## Methodology
