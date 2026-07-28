@@ -1,4 +1,3 @@
-# quant-backtester
 
 # Quantitative Trading Backtester 
 
@@ -11,6 +10,8 @@ engineering skills.
 ---
 
 ## Project Overview
+
+---
 
 This project implements a full backtesting pipeline from raw 
 price data through to strategy evaluation and performance 
@@ -28,6 +29,8 @@ and the 2022 bear market.
 ---
 
 ## Project Structure
+
+---
        
     quant-backtester/
     ├── data/                   # Raw and processed data storage
@@ -47,6 +50,8 @@ and the 2022 bear market.
 ---
 
 ## Statistical Analysis — Asset Selection
+
+---
 
 Before implementing any strategy, SPY was tested for mean 
 reversion using two established methods from Chan (2013): 
@@ -97,6 +102,8 @@ This follows the methodology outlined in Chan, E. (2013),
 
 ## Data
 
+---
+
 - **Source**: Yahoo Finance via the `yfinance` Python library
 - **Asset**: SPY (SPDR S&P 500 ETF Trust)
 - **Period**: January 2010 — January 2024
@@ -127,6 +134,8 @@ risk measurement.
 
 ## Methodology
 
+---
+
 ### Look-Ahead Bias Prevention
 
 All signals are generated using only information available 
@@ -140,7 +149,7 @@ single most important correctness requirement in backtesting.
 
 ---
 
-## Strategies Tested ##
+### Strategies Tested ###
 
 Three variants of the moving average crossover were tested:
 
@@ -158,6 +167,8 @@ representing realistic costs for a liquid ETF.
 ---
 
 ## Results
+
+---
 
 ### Full Period Performance (2010-2024)
 
@@ -272,6 +283,8 @@ regimes.
 ### Monte Carlo Plot
 
 ![Monte Carlo](notebooks/figures/monte_carlo_significance.png)
+
+---
 
 ## Reproducing the Analysis
 
