@@ -283,7 +283,7 @@ Clone the repository, install dependencies with
 
 ## Dependencies ##
 
-'''
+```
 yfinance
 pandas
 numpy
@@ -292,7 +292,7 @@ seaborn
 scipy
 statsmodels
 jupyter
-'''
+```
 
 ---
 
