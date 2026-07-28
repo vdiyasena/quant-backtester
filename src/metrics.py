@@ -55,6 +55,10 @@ def sharpe_ratio(returns, risk_free_rate=0.02, periods_per_year=252):
     
     Returns:
         float: Sharpe ratio
+    
+    Reference:
+    Sharpe, W.F. (1994). The Sharpe Ratio.
+    Journal of Portfolio Management, 21(1), 49-58.
     """
     ann_return = annualised_return(returns, periods_per_year)
     ann_vol = annualised_volatility(returns, periods_per_year)
@@ -82,6 +86,10 @@ def sortino_ratio(returns, risk_free_rate=0.02, periods_per_year=252):
     
     Returns:
         float: Sortino ratio
+    
+    Reference:
+    Sortino, F.A. and van der Meer, R. (1991). Downside Risk.
+    Journal of Portfolio Management, 17(4), 27-31.
     """
     ann_return = annualised_return(returns, periods_per_year)
     
@@ -105,6 +113,10 @@ def max_drawdown(cumulative_returns):
     
     Returns:
         float: maximum drawdown (negative number)
+
+    Reference:
+    Magdon-Ismail, M. and Atiya, A. (2004). Maximum Drawdown.
+    Risk Magazine, 17(10), 99-102.
     """
     rolling_max = cumulative_returns.cummax()
     drawdown = (cumulative_returns - rolling_max) / rolling_max
@@ -125,6 +137,10 @@ def calmar_ratio(returns, cumulative_returns, periods_per_year=252):
     
     Returns:
         float: Calmar ratio
+    
+    Reference:
+    Young, T.W. (1991). Calmar Ratio: A Smoother Tool.
+    Futures Magazine, 20(1).
     """
     ann_return = annualised_return(returns, periods_per_year)
     mdd = max_drawdown(cumulative_returns)

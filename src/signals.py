@@ -22,6 +22,10 @@ def ma_crossover_signal(df, fast=20, slow=50):
 
     Returns:
         pandas Series of signals (-1, 0, 1)
+    
+    Reference:
+    Murphy, J.J. (1999). Technical Analysis of the Financial
+    Markets. New York Institute of Finance. Chapter 9.
     """
     # Verify required columns exist
     assert f'sma_{fast}' in df.columns, f"sma_{fast} not found — run add_moving_averages first"
@@ -48,6 +52,10 @@ def ma_crossover_long_only(df, fast=20, slow=50):
     like SPY where shorting during a bull market is costly.
     
     Signal: 1 = long, 0 = flat (cash)
+
+    Reference:
+    Murphy, J.J. (1999). Technical Analysis of the Financial
+    Markets. New York Institute of Finance. Chapter 9.
     """
     assert f'sma_{fast}' in df.columns
     assert f'sma_{slow}' in df.columns

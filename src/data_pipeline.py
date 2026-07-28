@@ -42,6 +42,10 @@ def compute_returns(df):
 
     Returns:
         DataFrame with log_returns column added
+    
+    Reference:
+    Hull, J.C. (2018). Options, Futures, and Other Derivatives,
+    10th ed. Pearson. Chapter 15, p. 327.
     """
     df = df.copy()
     df['log_returns'] = np.log(df['Close'] / df['Close'].shift(1))

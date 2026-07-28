@@ -7,6 +7,10 @@ def add_moving_averages(df, windows=[20, 50]):
     """
     Add simple moving averages for given window lengths.
     All calculations use only past data — no look-ahead bias.
+    
+    Reference:
+    Murphy, J.J. (1999). Technical Analysis of the Financial
+    Markets. New York Institute of Finance. Chapter 9, p. 195.
     """
     df = df.copy()
     for w in windows:
@@ -18,6 +22,10 @@ def add_momentum(df, windows=[20]):
     """
     Momentum: cumulative log return over the past N days.
     Positive momentum = upward trend, negative = downward.
+
+    Reference:
+    Jegadeesh, N. and Titman, S. (1993). Returns to Buying
+    Winners and Selling Losers. Journal of Finance, 48(1), 65-91.
     """
     df = df.copy()
     for w in windows:
@@ -29,6 +37,10 @@ def add_volatility(df, window=20):
     """
     Rolling volatility: standard deviation of log returns.
     Used for position sizing and regime detection.
+
+    Reference:
+    Hull, J.C. (2018). Options, Futures, and Other Derivatives,
+    10th ed. Pearson. Chapter 15.
     """
     df = df.copy()
     df[f'volatility_{window}'] = df['log_returns'].rolling(window).std()
@@ -64,6 +76,10 @@ def adf_test(series, name=''):
 
     Returns:
         dict with test results
+    
+    Reference:
+    Dickey, D.A. and Fuller, W.A. (1979). Journal of the 
+    American Statistical Association, 74(366), 427-431.
     """
     result = adfuller(series.dropna())
     output = {
@@ -95,6 +111,10 @@ def hurst_exponent(series, max_lag=100):
 
     Returns:
         float: Hurst exponent
+    
+    Reference:
+    Chan, E. (2013). Algorithmic Trading. Wiley. Chapter 2,
+    pp. 40-43.
     """
     series = series.dropna().values
     lags = range(2, max_lag)

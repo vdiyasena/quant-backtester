@@ -23,6 +23,9 @@ def run_backtest(df, signal, transaction_cost=0.001):
 
     Returns:
         DataFrame with strategy and market returns
+    
+    Reference:
+    Chan, E. (2013). Algorithmic Trading. Wiley. Chapter 3.
     """
     results = df.copy()
     results['signal'] = signal
@@ -38,7 +41,7 @@ def run_backtest(df, signal, transaction_cost=0.001):
 
     # Apply transaction costs on position changes
     # A full reversal from -1 to +1 has position_change = 2
-    # so cost = 2 * transaction_cost, which is correct
+    # so cost = 2 * transaction_cost
     results['transaction_costs'] = results['position_change'] * transaction_cost
     results['strategy_returns_net'] = (results['strategy_returns']
                                        - results['transaction_costs'])
@@ -76,7 +79,8 @@ def split_in_out_sample(df, split_date='2019-01-01'):
 
     Using 2010-2018 as in-sample and 2019-2024 as out-of-sample
     gives roughly 70/30 split and ensures the test period includes
-    the 2020 COVID crash and 2022 bear market — a genuine stress test.
+    the 2020 COVID crash and 2022 bear market. This is a good test
+    of robustness and avoids overfitting to a single market regime.
 
     Args:
         df: full DataFrame
@@ -84,6 +88,9 @@ def split_in_out_sample(df, split_date='2019-01-01'):
 
     Returns:
         tuple of (in_sample_df, out_of_sample_df)
+    
+    Reference:
+    Chan, E. (2013). Algorithmic Trading. Wiley. pp. 67-71.
     """
     in_sample = df[df.index < split_date]
     out_of_sample = df[df.index >= split_date]
