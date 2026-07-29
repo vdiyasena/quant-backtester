@@ -308,7 +308,8 @@ def monte_carlo_sharpe(results, n_simulations=10000,
     }
 
 def plot_monte_carlo(mc_results, label='Strategy', 
-                     save_dir='figures'):
+                     save_dir='figures', 
+                     fig_name = 'monte_carlo_significance.png'):
     """
     Plot Monte Carlo null distribution vs observed Sharpe ratio.
     
@@ -360,7 +361,7 @@ def plot_monte_carlo(mc_results, label='Strategy',
     
     plt.tight_layout()
     save_path = os.path.join(save_dir, 
-                              'monte_carlo_significance.png')
+                              fig_name)
     plt.savefig(save_path, dpi=150, bbox_inches='tight')
     plt.show()
     print(f"Saved: {save_path}")

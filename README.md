@@ -258,14 +258,13 @@ rather than any failure of the strategy.
 
 | Period | Observed Sharpe | 95th Percentile (Null) | p-value | Significant |
 |---|---|---|---|---|
-| In-sample (2010-2018) | 0.490 | 0.259 | 0.0002 | Yes |
-| Out-of-sample (2019-2024) | 0.410 | — | 0.0213 | Yes |
+| In-sample (2010-2018) | 0.490 | 0.351 | 0.0038 | Yes |
+| Out-of-sample (2019-2024) | 0.410 | 0.3036 | 0.0213 | Yes |
 
-The observed Sharpe ratio of 0.490 exceeds every single 
-one of 10,000 random signal timings (100th percentile), 
-with p = 0.0002. Out-of-sample significance is maintained 
-at p = 0.0213, confirming timing skill generalises to 
-genuinely unseen data.
+The observed Sharpe ratio of the in-sample test, 0.490, lies at the 99.6th 
+percentile, with p = 0.0038. The out-of-sample significance is maintained 
+at p = 0.0213, which lies at the 97.9th percentile, confirming timing skill 
+generalises to genuinely unseen data.
 
 The statistical significance confirms that the observed 
 historical performance is unlikely to be random. Importantly,
@@ -275,9 +274,10 @@ regimes.
 
 *Reference: López de Prado (2018), Chapter 8*
 
-### Monte Carlo Plot
+### Monte Carlo Plots
 
-![Monte Carlo](notebooks/figures/monte_carlo_significance.png)
+![Monte Carlo](notebooks/figures/monte_carlo_in_sample.png)
+![Monte Carlo](notebooks/figures/monte_carlo_out_sample.png)
 
 ---
 
