@@ -259,7 +259,7 @@ rather than any failure of the strategy.
 | Period | Observed Sharpe | 95th Percentile (Null) | p-value | Significant |
 |---|---|---|---|---|
 | In-sample (2010-2018) | 0.490 | 0.351 | 0.0038 | Yes |
-| Out-of-sample (2019-2024) | 0.410 | 0.3036 | 0.0213 | Yes |
+| Out-of-sample (2019-2024) | 0.410 | 0.304 | 0.0213 | Yes |
 
 The observed Sharpe ratio of the in-sample test, 0.490, lies at the 99.6th 
 percentile, with p = 0.0038. The out-of-sample significance is maintained 
